@@ -8,11 +8,10 @@ app = Flask(__name__)
 @app.route("/iframe")
 def iframe():
     """Embed a map as an iframe on a page."""
-    m = folium.Map()
+    m = folium.Map(location=(38.9673769, -95.2793475))
 
     m.add_child(folium.ClickForMarker())
 
-    folium.Marker((lat, lon), draggable=True).add_to(m)
     # set the iframe width and height
     m.get_root().width = "800px"
     m.get_root().height = "600px"
