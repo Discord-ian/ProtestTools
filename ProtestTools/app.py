@@ -1,4 +1,4 @@
-from flask import Flask, render_template_string
+from flask import Flask, render_template
 import folium
 
 
@@ -18,19 +18,21 @@ def iframe():
     m.get_root().height = "600px"
     iframe = m.get_root()._repr_html_()
 
-    return render_template_string(
-        """
+    return render_template("login.html")
+    """return render_template_string(
+        
             <!DOCTYPE html>
             <html>
-                <head></head>
+                <head><h1>ProtestTools</h1></head>
                 <body>
-                    <h1>Using an iframe</h1>
+                    Location Map<br>
                     {{ iframe|safe }}
+                    
                 </body>
             </html>
-        """,
+        
         iframe=iframe,
-    )
+    )"""
 
 
 if __name__ == "__main__":
