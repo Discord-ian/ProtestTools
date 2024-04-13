@@ -1,3 +1,4 @@
 flask
 folium
-propelauth_flask
+flask-login
+flask_bcrypt

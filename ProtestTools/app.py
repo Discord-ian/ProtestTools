@@ -3,7 +3,7 @@ import folium
 
 
 app = Flask(__name__)
-from auth import who_am_i
+from auth import login
 
 
 @app.route("/iframe")
