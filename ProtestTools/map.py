@@ -1,10 +1,12 @@
-from flask import Flask, url_for, redirect, render_template
+from flask import Flask, url_for, redirect, render_template, request
 import folium
 from app import app
 
 
 @app.route("/map/create_pin", methods=["GET", "POST"])
 def create_pin():
+    if request.method == "GET":
+        pass
     m = folium.Map(location=(38.9673769, -95.2793475))
 
     m.add_child(folium.ClickForMarker())
