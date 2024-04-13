@@ -1,8 +1,7 @@
-from flask import Flask, url_for, redirect, render_template, request, Blueprint
+from flask import render_template, request, Blueprint
 import folium
 from db import add_event
-from objects.event import Event
-import logging
+from ProtestTools.models import Event
 
 map_functions = Blueprint("map", __name__)
 

@@ -2,3 +2,5 @@ flask
 folium
 flask-login
 flask_bcrypt
+flask_pymongo
+
