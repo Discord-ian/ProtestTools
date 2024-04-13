@@ -16,3 +16,13 @@ def find_user(username):
     :param username:
     :return:
     """
+
+
+def get_event_dicts():
+    mongo = client.cx
+    db = mongo.ProtestTools
+    events = db.Events.find()
+    return_list = []
+    for event in events:
+        return_list.append(event)
+    return return_list

@@ -27,8 +27,7 @@
         .eventbar_container{
             position:relative;
             padding: 10px 6px 70px 6px;
-            margin-right: 12px;
-            margin-left: 12px;
+            margin: 10px 12px;
             background-color: rgb(255,255,255);
             border-radius: 25px;
             box-shadow: 10px 10px 5px rgb(232,225,225);
@@ -44,15 +43,13 @@
           padding: 10px 10px 10px 16px;
           text-decoration: none;
           font-size: 25px;
-          color: rgb(106,106,106);
+            color: #f1f1f1;
           display: block;
             background-color: rgb(154,168,226);
             border-radius: 25px;
             font-family: "Andale Mono", monospace;
         }
-        .eventbar a:hover {
-            color: #f1f1f1;
-        }
+
 
         .event_info {
           padding: 6px 16px 6px 16px;
@@ -75,6 +72,9 @@
           padding: 0px 10px;
             background-color: rgb(74,90,154);
         }
+        .event {
+            height: 20vh
+        }
 
 
     </style>
@@ -83,16 +83,18 @@
     <div class="eventbar">
         <h1>Events</h1>
         <hr class="line">
-        <div class="eventbar_container">
-            <a>placehold</a>
-            <div class ="event_info">
-                    this event is about "......"<br>
-                    date is "....."<br>
+                {% for event in events %}
+                <div class="eventbar_container">
+                <a>{{event.event_name}}</a>
+                <div class ="event_info">
+                    {{event.cause}}<br>
+                    date is {{event.date}} at {{event.time}}<br>
                 </div>
-            <button class="button go_button"> -> </button>
+                <button onclick="location.href='http://127.0.0.1:5000/event/{{event.id}}'" class="button go_button"> -> </button>
+                </div>
+                {% endfor %}
         </div>
 
-    </div>
     <div class="main">
         <p>Hello</p>
         {{ iframe|safe }}

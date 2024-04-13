@@ -1,4 +1,5 @@
 from flask import Flask, render_template, Blueprint
+from db import get_event_dicts
 import folium
 
 # page contains list of created events and displays event information on click
@@ -14,11 +15,11 @@ def view_events():
     iframe_map.get_root().width = "600px"
     iframe_map.get_root().height = "400px"
     iframe = iframe_map.get_root()._repr_html_()
+    events = get_event_dicts()
+    return render_template("event_viewer.html", iframe=iframe, events=events)
 
-    return render_template("event_viewer.html", iframe=iframe)
 
-
-@eventview.route("/eventpage")
+@eventview.route("/event/<event_id>")
 def event_info():
 
     # set the iframe width and height

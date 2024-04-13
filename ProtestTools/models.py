@@ -17,7 +17,12 @@ class Event:
         self.lng = None
 
     def dict(self):
-        return_dict = {"event_name": self.name, "date": self.date, "location": {}}
+        return_dict = {
+            "event_name": self.name,
+            "date": self.date,
+            "time": self.time,
+            "location": {},
+        }
         return_dict["location"]["address"] = self.address
         return_dict["location"]["city"] = self.city
         return_dict["location"]["zip_code"] = self.zip_code
