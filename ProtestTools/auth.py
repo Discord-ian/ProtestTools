@@ -45,7 +45,7 @@ def create_user(invite_id):
 def generate_invite():
     invite_url = None
     if request.method == "POST":
-        print("post")
+        print(request.form)
         invite_url = create_invite(request.form["invite_uses"])
         print(invite_url)
     return render_template("generate_invite.html", invite_url=invite_url)
@@ -87,4 +87,4 @@ def create_invite(uses):
     invite = {"invite_id": invite_id, "uses": uses}
     client.cx.ProtestTools.InviteLinks.insert_one(invite)
 
-    return url_for("signup", invite_id=invite_id)
+    return url_for("auth_func.create_user", invite_id=invite_id, _external=True)
