@@ -3,20 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <style>
+        .logocontainer{
+            height:100%;
+            width:40%;
+            position: fixed;
+            top:0;
+            left:0;
+        }
+
+        .inputcontainer{
+            height:75%;
+            width:60%;
+            position: fixed;
+            top:0;
+            right:0;
+            display:flex;
+            flex-direction:column ;
+            justify-content: space-around;
+            align-items: center;
+            column-gap: 290px;
+            margin-top:6%;
+        }
+        #usern{
+            height:70px;
+            width:450px;
+            padding:20px;
+            border-radius: 18px;
+            background-color: rgb(244,244,244);
+        }
+
+        #pass1{
+            height:70px;
+            width:450px;
+            padding:20px;
+            border-radius: 18px;
+            background-color: rgb(244,244,244);
+        }
+
+        #pass2 {
+            height: 70px;
+            width: 450px;
+            padding: 20px;
+            border-radius: 18px;
+            background-color: rgb(244, 244, 244);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
       <h1>User Signup</h1>
       <br>
-      <form action="" method="post">
-        <input type="text" placeholder="Username" name="username" value="{{
-          request.form.username }}">
-         <input type="password" placeholder="Password" name="password" value="{{
-          request.form.password }}">
-          <input type="password" placeholder="Password" name="password2" value="{{
-          request.form.password2 }}">
-        <input class="btn btn-default" type="submit" value="Login">
-      </form>
+        <div class="logocontainer">
+
+        </div>
+        <form action="" method="post">
+        <div class="inputcontainer">
+            <div>
+                <input type="text" id="usern"placeholder="Username" name="username" value="{{
+              request.form.username }}">
+            </div>
+            <div>
+                <input type="password" id="pass1" placeholder="Password" name="password" value="{{
+              request.form.password }}">
+            </div>
+             <div>
+                 <input type="password" id="pass2" placeholder="Password" name="password2" value="{{
+              request.form.password2 }}">
+             </div>
+            <div>
+                  <input class="btn btn-default" type="submit" value="Login">
+              </div>
+
+
+        </div>
+
+        </form>
+
       {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}
       {% endif %}
