@@ -34,9 +34,10 @@ def create_user(invite_id):
                 error = "Passwords do not match."
                 return render_template("signup_page.html", error=error)
             # TODO: Decrement invite id uses
-            generate_db_user(
-                request.form["username"], request.form["password"], invite_id
-            )
+            if decrement_invite(invite_id):
+                generate_db_user(
+                    request.form["username"], request.form["password"], invite_id
+                )
         return render_template("signup_page.html", error=error)
     else:
         return redirect(url_for("eventview.view_events"))
@@ -73,12 +74,24 @@ def try_login(username, password):
 def generate_db_user(username, password, invite_id):
     hashed_pw = generate_password_hash(password, method="pbkdf2", salt_length=16)
     user = {"username": username, "password": hashed_pw}
-    decrement_invite(invite_id)
     client.cx.ProtestTools.Users.insert_one(user)
 
 
 def decrement_invite(invite_id):
-    x = client.cx.ProtestTools.InviteLinks.find_one({"invite_id": invite_id})
+    try:
+        x = client.cx.ProtestTools.InviteLinks.find_one({"invite_id": invite_id})
+        data_id = x["_id"]
+        x["uses"] = int(x["uses"]) - 1
+        if int(x["uses"]) > 0:
+            client.cx.ProtestTools.InviteLinks.replace_one(
+                {"_id": data_id}, x, upsert=True
+            )
+        else:
+            client.cx.ProtestTools.InviteLinks.delete_one({"_id": data_id})
+        return True
+    except ValueError:
+        # There might have been another user using the invite
+        return False
 
 
 def valid_new_user_link(inv_id):
@@ -97,6 +110,6 @@ def create_invite(uses):
     :return:
     """
     invite_id = token_urlsafe(16)
-    invite = {"invite_id": invite_id, "uses": uses}
+    invite = {"invite_id": invite_id, "uses": int(uses)}
     client.cx.ProtestTools.InviteLinks.insert_one(invite)
     return url_for("auth_func.create_user", invite_id=invite_id, _external=True)

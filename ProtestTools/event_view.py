@@ -1,6 +1,5 @@
 from flask import Flask, render_template, Blueprint
 import folium
-from app import app
 
 # page contains list of created events and displays event information on click
 eventview = Blueprint("eventview", __name__)
