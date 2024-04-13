@@ -54,9 +54,7 @@ def generate_invite():
     # Flask endpoint to generate an invite
     invite_url = None
     if request.method == "POST":
-        print(request.form)
         invite_url = create_invite(request.form["invite_uses"])
-        print(invite_url)
     return render_template("generate_invite.html", invite_url=invite_url)
 
 
@@ -70,9 +68,7 @@ def try_login(username, password):
     try:
         x = client.cx.ProtestTools.Users.find_one({"username": username})
         if check_password_hash(x["password"], password):
-            print("hi)")
             user = User(username, id=x["_id"])
-            print("trying to log in")
             login_user(user, remember=True)
             return True
     except ValueError as e:
