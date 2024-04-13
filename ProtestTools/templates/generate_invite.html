@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Invite</title>
+</head>
+<body>
+    <form action="" method="post">
+        <label for="invite_uses">Invite Uses</label>
+        <input type="number" id="invite_uses" min="1" max="100" value="{{ request.form.invite_uses }}" required>
+        <input class="btn" type="submit">
+    </form>
+    {% if invite_url %}
+    <a href=" {{ invite_url }} ">{{invite_url}}</a>
+    {% endif %}
+</body>
+</html>

@@ -9,6 +9,7 @@ from flask import (
 )
 from app import client
 from werkzeug.security import generate_password_hash, check_password_hash
+from secrets import token_urlsafe
 from flask_login import login_user
 from models import User
 
@@ -23,17 +24,31 @@ def login():
     return render_template("login_page.html", error=error)
 
 
-@auth_func.route("/create_user/<invite_id>", methods=["GET", "POST"])
+@auth_func.route("/signup/<invite_id>", methods=["GET", "POST"])
 def create_user(invite_id):
     if valid_new_user_link(invite_id):
-        if request.method == "POST":
-            # Decrement invite id uses
-            generate_db_user(request.form["username"], request.form["password"])
-            print(request.form["username"] + " " + request.form["password"])
         error = None
-        return render_template("login_page.html", error=error)
+        if request.method == "POST":
+            if request.form["password"] != request.form["password2"]:
+                error = "Passwords do not match."
+                return render_template("signup_page.html", error=error)
+            # TODO: Decrement invite id uses
+            generate_db_user(
+                request.form["username"], request.form["password"], invite_id
+            )
+        return render_template("signup_page.html", error=error)
     else:
         return redirect(url_for("eventview.view_events"))
+
+
+@auth_func.route("/generate_invite", methods=["GET", "POST"])
+def generate_invite():
+    invite_url = None
+    if request.method == "POST":
+        print("post")
+        invite_url = create_invite(request.form["invite_uses"])
+        print(invite_url)
+    return render_template("generate_invite.html", invite_url=invite_url)
 
 
 def try_login(username, password):
@@ -65,3 +80,11 @@ def valid_new_user_link(inv_id):
     except TypeError:
         # Type error would occur if x ends up being None
         return False
+
+
+def create_invite(uses):
+    invite_id = token_urlsafe(16)
+    invite = {"invite_id": invite_id, "uses": uses}
+    client.cx.ProtestTools.InviteLinks.insert_one(invite)
+
+    return url_for("signup", invite_id=invite_id)
