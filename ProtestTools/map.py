@@ -1,10 +1,13 @@
 from flask import Flask, url_for, redirect, render_template, request
 import folium
+import logging
 from app import app
 
 
 @app.route("/map/create_pin", methods=["GET", "POST"])
 def create_pin():
+    # TODO: Add default country option somewhere in config
+    # TODO: Timezone support
     """
     Form has fields:
     event_name
@@ -17,15 +20,15 @@ def create_pin():
     event_country
     :return:
     """
-    if request.method == "GET":
+    if request.method == "POST":
         pass
-    m = folium.Map(location=(38.9673769, -95.2793475))
+    iframe_map = folium.Map(location=(38.9673769, -95.2793475))
 
-    m.add_child(folium.ClickForMarker())
+    iframe_map.add_child(folium.ClickForMarker())
 
     # set the iframe width and height
-    m.get_root().width = "800px"
-    m.get_root().height = "600px"
-    iframe = m.get_root()._repr_html_()
+    iframe_map.get_root().width = "800px"
+    iframe_map.get_root().height = "600px"
+    iframe = iframe_map.get_root()._repr_html_()
 
     return render_template("createEvent.html", iframe=iframe)
