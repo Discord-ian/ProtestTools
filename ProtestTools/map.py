@@ -1,6 +1,7 @@
 from flask import Flask, url_for, redirect, render_template, request, Blueprint
 import folium
 from db import add_event
+from objects.event import Event
 import logging
 
 map_functions = Blueprint("map", __name__)
@@ -23,7 +24,16 @@ def create_pin():
     :return:
     """
     if request.method == "POST":
-        add_event()
+        event = Event()
+        event.name = request.form["event_name"]
+        event.date = request.form["event_date"]
+        event.time = request.form["event_time"]
+        event.address = request.form["event_address"]
+        event.city = request.form["event_city"]
+        event.zip_code = request.form["event_zip"]
+        event.state = request.form["event_state"]
+        event.country = request.form["event_country"]
+        add_event(event)
     iframe_map = folium.Map(location=(38.9673769, -95.2793475))
 
     iframe_map.add_child(folium.ClickForMarker())

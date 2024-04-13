@@ -11,4 +11,4 @@ def connect_db():
 def add_event(event_info):
     client = connect_db().cx
     db = client.ProtestTools
-    db.Events.insert_one(event_info.json())
+    db.Events.insert_one(event_info.dict())
