@@ -2,6 +2,8 @@ from pymongo import MongoClient
 from flask_pymongo import PyMongo
 from flask import current_app, g
 from app import client
+from models import User
+from bson import ObjectId
 
 
 def add_event(event_info):
@@ -10,12 +12,19 @@ def add_event(event_info):
     db.Events.insert_one(event_info.dict())
 
 
-def find_user(username):
+def find_user(user_Id):
     """
     Searches DB for the specified username
     :param username:
     :return:
     """
+    mongo = client.cx
+    db = mongo.ProtestTools
+    try:
+        user = db.Users.find_one({"_id": ObjectId(user_Id)})
+        return User(username=user["username"], id=["_id"])
+    except TypeError:
+        return None
 
 
 def get_event_dicts():

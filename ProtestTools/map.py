@@ -1,5 +1,6 @@
 from flask import render_template, request, Blueprint
 import folium
+from flask_login import login_required
 from db import add_event
 from models import Event
 
@@ -7,6 +8,7 @@ map_functions = Blueprint("map", __name__)
 
 
 @map_functions.route("/map/create_pin", methods=["GET", "POST"])
+@login_required
 def create_pin():
     # TODO: Add default country option somewhere in config
     # TODO: Timezone support
