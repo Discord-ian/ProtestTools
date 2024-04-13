@@ -1,11 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, Blueprint
 import folium
-from app import app
 
 # page contains list of created events and displays event information on click
+eventview = Blueprint("eventview", __name__)
 
 
-@app.route("/eventview")
+@eventview.route("/eventview")
 def view_events():
     # TODO: add information to main from database on click
     # TODO: add links to individual event pages

@@ -1,4 +1,7 @@
 from flask_login import UserMixin
+from app import client
+
+
 class Event:
 
     def __init__(self):
@@ -19,4 +22,8 @@ class Event:
         return_dict["location"]["country"] = self.country
         return return_dict
 
-class User(Uesr)
+
+class User(UserMixin):
+    def __init__(self, username, password):
+        self.id = username
+        self.password = password
