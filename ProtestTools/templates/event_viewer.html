@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .sidenav {
+          height: 100%;
+          width: 33%;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: #111;
+          overflow-x: hidden;
+          padding-top: 20px;
+        }
+        .sidenav a {
+          padding: 6px 8px 6px 16px;
+          text-decoration: none;
+          font-size: 25px;
+          color: #818181;
+          display: block;
+        }
+        .main {
+          margin-left: 33%; /* Same as the width of the sidenav */
+          font-size: 28px; /* Increased text to enable scrolling */
+          padding: 0px 10px;
+        }
+        @media screen and (max-height: 450px) {
+          .sidenav {padding-top: 15px;}
+          .sidenav a {font-size: 18px;}
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidenav">
+      <a >About</a>
+      <a >Services</a>
+      <a >Clients</a>
+      <a >Contact</a>
+    </div>
+    <div class="main">
+        <p>Hello</p>
+        </div>
+</body>
+</html>

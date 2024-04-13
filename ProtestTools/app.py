@@ -7,6 +7,7 @@ import configparser
 app = Flask(__name__)
 from auth import login
 from map import create_pin
+from event_view import view_events
 
 
 if __name__ == "__main__":
