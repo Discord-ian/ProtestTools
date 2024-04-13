@@ -26,6 +26,7 @@ def login():
 
 @auth_func.route("/signup/<invite_id>", methods=["GET", "POST"])
 def create_user(invite_id):
+    #
     if valid_new_user_link(invite_id):
         error = None
         if request.method == "POST":
@@ -43,6 +44,7 @@ def create_user(invite_id):
 
 @auth_func.route("/generate_invite", methods=["GET", "POST"])
 def generate_invite():
+    # Flask endpoint to generate an invite
     invite_url = None
     if request.method == "POST":
         print(request.form)
@@ -52,6 +54,12 @@ def generate_invite():
 
 
 def try_login(username, password):
+    """
+    Attempts to login a user by first looking up the relevant username in the databse
+    :param username:
+    :param password:
+    :return:
+    """
     try:
         x = client.cx.ProtestTools.Users.find_one({"username": username})
         hashed_pw = generate_password_hash(password, method="pbkdf2", salt_length=16)
@@ -83,8 +91,12 @@ def valid_new_user_link(inv_id):
 
 
 def create_invite(uses):
+    """
+    Generates an invite with a given amount of uses. Saves the ID to MongoDB
+    :param uses:
+    :return:
+    """
     invite_id = token_urlsafe(16)
     invite = {"invite_id": invite_id, "uses": uses}
     client.cx.ProtestTools.InviteLinks.insert_one(invite)
-
     return url_for("auth_func.create_user", invite_id=invite_id, _external=True)
