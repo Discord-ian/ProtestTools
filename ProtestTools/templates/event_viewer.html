@@ -3,6 +3,7 @@
 <head>
   <meta content="width=device-width, initial-scale=1">
     <style>
+        body {background-color: rgb(74,90,154);}
         .eventbar {
           height: 100%;
           width: 25%;
@@ -10,31 +11,32 @@
           z-index: 1;
           top: 0;
           left: 0;
-          background-color: #111;
+          background-color: rgb(244,244,244);
           overflow-x: hidden;
           padding-top: 20px;
             overflow-y: scroll;
+            border-radius: 25px;
         }
         .eventbar_container{
-            border: 2px solid #00A4BD;
             padding: 10px 6px 70px 6px;
-            border-radius: 2px;
             margin-right: 12px;
             margin-left: 12px;
+            background-color: rgb(255,255,255);
+            border-radius: 25px;
         }
         .eventbar h1{
             position: relative;
             padding: 20px;
-            color: #818181;
-            border-bottom: 1px;
-            border-bottom-color: aliceblue;
         }
+
         .eventbar a {
           padding: 10px 10px 10px 16px;
           text-decoration: none;
           font-size: 25px;
           color: #818181;
           display: block;
+            background-color: rgb(154,168,226);
+            border-radius: 25px;
         }
         .eventbar a:hover {
             color: #f1f1f1;
@@ -51,6 +53,7 @@
           margin-left: 33%; /* Same as the width of the sidenav */
           font-size: 28px; /* Increased text to enable scrolling */
           padding: 0px 10px;
+            background-color: rgb(74,90,154);
         }
 
 
@@ -60,12 +63,11 @@
     <div class="eventbar">
         <h1>Events</h1>
         <div class="eventbar_container">
-            <a>placehold<br>
-                <div class ="event_info">
+            <a>placehold</a>
+            <div class ="event_info">
                     this event is about "......"<br>
                     date is "....."<br>
                 </div>
-            </a>
         </div>
     </div>
     <div class="main">
