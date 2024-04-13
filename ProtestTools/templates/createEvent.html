@@ -1,11 +1,81 @@
  <!DOCTYPE html>
             <html>
-                <head><h1>ProtestTools</h1></head>
+                <head><h1>ProtestTools</h1>
+                <style>
+                    .col-25 {
+                        float: left;
+                        width: 25%;
+                        margin-top: 6px;
+                    }
+
+                    .col-75 {
+                      float: left;
+                      width: 75%;
+                      margin-top: 6px;
+                    }
+
+                </style>
+
+
+
+                </head>
                 <body>
                     Location Map<br>
-                    {{ iframe|safe }}
-                    <label for="ename">Event Name:</label><br>\
+                    {{ iframe|safe }}<br>
+                    <div class ="inputbox">
+                        <form action =" ">
+                            <div class="col-25">
+                                <label for="ename">Event Name</label>
+                             </div>
+                            <div class="col-75">
+                                <input type="text" id="ename" name="eventname" placeholder="Event name..">
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <label for="ename">Event Name:</label><br>
                     <input type="text" id="ename" name="ename"><br>
+                    <label for="month">Month:</label><br>
+                    <input type="text" id="month" name="month"><br>
+                    <label for="day">Day:</label><br>
+                    <input type="text" id="day" name="day"><br>
+                    <label for="year">Year:</label><br>
+                    <input type="text" id="year" name="year"><br>
+                    <label for="etime">Event start time (hr:min):</label><br>
+                    <input type="text" id="etime" name="etime"><br>
+                    <label for="address"> Event address: </label><br>
+                    <input type="text" id="address" name="address"><br>
+                    <label for="city"> Event city: </label><br>
+                    <input type="text" id="city" name="city"><br>
+                    <label for="state"> Event state: </label><br>
+                    <input type="text" id="state" name="state"><br>
+                    <label for="zipcode"> Zip code: </label><br>
+                    <input type="text" id="zipcode" name="zipcode"><br>
+
+                    <form method="get" id="eventCause">
+                        <input type="submit" />
+                    </form>
+                    <textarea form ="eventCause" name="eventCause" id="ecid" cols="35" wrap="soft"></textarea>
+
                 </body>
             </html>
- iframe=iframe,
