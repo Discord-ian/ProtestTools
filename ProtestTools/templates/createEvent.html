@@ -1,93 +1,149 @@
- <!DOCTYPE html>
-            <html>
-                <head><h1>ProtestTools</h1>
-                <style>
-                    .col-25 {
-                        float: left;
-                        width: 25%;
-                        margin-top: 6px;
-                    }
+<!DOCTYPE html>
+<html>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+<head><h1>ProtestTools</h1>
+    <style>
+        #map {
+            height: 40vh;
+            width: 40vw;
 
-                    .col-75 {
-                      float: left;
-                      width: 75%;
-                      margin-top: 6px;
-                    }
+        }
+        .col-25 {
+            float: left;
+            width: 25%;
+            margin-top: 6px;
+        }
 
-                </style>
+        .col-75 {
+            float: left;
+            width: 75%;
+            margin-top: 6px;
+        }
 
-
-
-                </head>
-                <body>
-                    Location Map<br>
-                    {{ iframe|safe }}<br>
-                    <div class ="inputbox">
-                        <form action ="", method="post">
-                            <div class="col-25">
-                                <label for="evname">Event Name</label>
-                             </div>
-                            <div class="col-75">
-                                <input type="text" id="evname" name="event_name" placeholder="Event name..">
-                            </div>
-
-                            <div>
-                                <label for="evdesc">Event Description</label><br>
-                                <textarea id="evdesc" name="paragraph_text" cols="50" rows="10"></textarea>
-                            </div>
-                            <div class="col-25">
-                                <label for="evcause">Cause</label>
-                             </div>
-                            <div class="col-75">
-                                <input type="text" id="evcause" name="event_cause" >
-                            </div>
-                            <div class="col-25">
-                                <label for="evdate">Event Date</label>
-                             </div>
-                            <div class="col-75">
-                                <input type="date" id="evdate" name="event_date" >
-                            </div>
-                            <div class="col-25">
-                                <label for="evtime">Event Start Time</label>
-                             </div>
-                            <div class="col-75">
-                                <input type="time" id="evtime" name="event_time" >
-                            </div>
-                            <div class="col-25">
-                                <label for="evaddress">Street Address</label>
-                             </div>
-                            <div class="col-75">
-                                <input type="text" id="evaddress" name="event_address" placeholder="Street Address">
-                            </div>
-                            <div class="col-25">
-                                <label for="evcity">City</label>
-                             </div>
-                            <div class="col-75">
-                                <input type="text" id="evcity" name="event_city" placeholder="City..">
-                            </div>
-                            <div class="col-25">
-                                <label for="evzip">Zip Code</label>
-                             </div>
-                            <div class="col-75">
-                                <input type="text" id="evzip" name="event_zip" >
-                            </div>
-                            <div class="col-25">
-                                <label for="evstate">State</label>
-                             </div>
-                            <div class="col-75">
-                                <input type="text" id="evstate" name="event_state" placeholder="State(two letter)..">
-                            </div>
-                            <div class="col-25">
-                                <label for="evcountry">Country</label>
-                             </div>
-                            <div class="col-75">
-                                <input type="text" id="evcountry" name="event_country" >
-                            </div>
-                            <input type="submit"/>
-
-                        </form>
+    </style>
 
 
-                    </div>
-                </body>
-            </html>
+</head>
+<body>
+Location Map<br>
+<div id="map">
+</div>
+
+<script>
+    var startLat = {{ lat|safe }}
+    var startLong = {{ long|safe }}
+    var map = L.map('map').setView([startLat, startLong], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+    var marker;
+    var lat, lng;
+    var form = document.querySelector("#event_form")
+
+    function onMapClick(e) {
+        if(marker == null) {
+            marker = L.marker(e.latlng, {draggable:true}).addTo(map)
+            document.querySelector("#event_form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            sendFormData()
+    });
+        }
+    }
+    map.on('click', onMapClick)
+    async function sendFormData() {
+        console.log("data")
+        const formData = new FormData(document.querySelector("#event_form"));
+        if (marker != null) {
+            lat = marker.getLatLng().lat;
+            lng = marker.getLatLng().lng;
+        }
+        formData.append("lat", lat);
+        formData.append("lng", lng);
+        formData.append("event_name", "wahoo")
+        try {
+            const response = await fetch("http://127.0.0.1:5000/map/create_pin", {
+                method: 'POST',
+                body: formData
+                })
+            console.log(await response.json())
+            }
+            catch (e)
+            {
+            console.error(e);
+            }
+    }
+
+</script>
+<br>
+<div class="inputbox">
+    <form action=" ", method="post" id="event_form">
+        <div class="col-25">
+            <label for="evname">Event Name</label>
+        </div>
+        <div class="col-75">
+            <input type="text" id="evname" name="event_name" placeholder="Event name..">
+        </div>
+
+        <div>
+            <label for="evdesc">Event Description</label><br>
+            <textarea id="evdesc" name="paragraph_text" cols="50" rows="10"></textarea>
+        </div>
+        <div class="col-25">
+            <label for="evcause">Cause</label>
+        </div>
+        <div class="col-75">
+            <input type="text" id="evcause" name="event_cause">
+        </div>
+        <div class="col-25">
+            <label for="evdate">Event Date</label>
+        </div>
+        <div class="col-75">
+            <input type="date" id="evdate" name="event_date">
+        </div>
+        <div class="col-25">
+            <label for="evtime">Event Start Time</label>
+        </div>
+        <div class="col-75">
+            <input type="time" id="evtime" name="event_time">
+        </div>
+        <div class="col-25">
+            <label for="evaddress">Street Address</label>
+        </div>
+        <div class="col-75">
+            <input type="text" id="evaddress" name="event_address" placeholder="Street Address">
+        </div>
+        <div class="col-25">
+            <label for="evcity">City</label>
+        </div>
+        <div class="col-75">
+            <input type="text" id="evcity" name="event_city" placeholder="City..">
+        </div>
+        <div class="col-25">
+            <label for="evzip">Zip Code</label>
+        </div>
+        <div class="col-75">
+            <input type="text" id="evzip" name="event_zip">
+        </div>
+        <div class="col-25">
+            <label for="evstate">State</label>
+        </div>
+        <div class="col-75">
+            <input type="text" id="evstate" name="event_state" placeholder="State(two letter)..">
+        </div>
+        <div class="col-25">
+            <label for="evcountry">Country</label>
+        </div>
+        <div class="col-75">
+            <input type="text" id="evcountry" name="event_country">
+        </div>
+        <input type="submit"/>
+    </form>
+</div>
+</body>
+</html>

@@ -24,6 +24,7 @@ def create_pin():
     """
     if request.method == "POST":
         event = Event()
+        print(request.form)
         event.name = request.form["event_name"]
         event.date = request.form["event_date"]
         event.time = request.form["event_time"]
@@ -32,14 +33,7 @@ def create_pin():
         event.zip_code = request.form["event_zip"]
         event.state = request.form["event_state"]
         event.country = request.form["event_country"]
+        event.lat = request.form["lat"]
+        event.lng = request.form["lng"]
         add_event(event)
-    iframe_map = folium.Map(location=(38.9673769, -95.2793475))
-
-    iframe_map.add_child(folium.ClickForMarker())
-
-    # set the iframe width and height
-    iframe_map.get_root().width = "800px"
-    iframe_map.get_root().height = "600px"
-    iframe = iframe_map.get_root()._repr_html_()
-
-    return render_template("createEvent.html", iframe=iframe)
+    return render_template("createEvent.html", lat=38.9673769, long=-95.2793475)

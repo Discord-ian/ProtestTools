@@ -13,6 +13,8 @@ class Event:
         self.zip_code = None
         # TODO: Change how self.country works
         self.country = None
+        self.lat = None
+        self.lng = None
 
     def dict(self):
         return_dict = {"event_name": self.name, "date": self.date, "location": {}}
@@ -20,6 +22,8 @@ class Event:
         return_dict["location"]["city"] = self.city
         return_dict["location"]["zip_code"] = self.zip_code
         return_dict["location"]["country"] = self.country
+        return_dict["location"]["lat"] = self.lat
+        return_dict["location"]["lng"] = self.lng
         return return_dict
 
 
