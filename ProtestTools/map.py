@@ -1,10 +1,11 @@
-from flask import Flask, url_for, redirect, render_template, request
+from flask import Flask, url_for, redirect, render_template, request, Blueprint
 import folium
 import logging
-from app import app
+
+map_functions = Blueprint("map", __name__)
 
 
-@app.route("/map/create_pin", methods=["GET", "POST"])
+@map_functions.route("/map/create_pin", methods=["GET", "POST"])
 def create_pin():
     # TODO: Add default country option somewhere in config
     # TODO: Timezone support
