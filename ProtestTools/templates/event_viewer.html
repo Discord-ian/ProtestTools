@@ -13,30 +13,39 @@
           left: 0;
           background-color: rgb(244,244,244);
           overflow-x: hidden;
-          padding-top: 20px;
+          padding-top: 7px;
             overflow-y: scroll;
             border-radius: 25px;
+
+        }
+        .line{
+            border-bottom: 2px rgb(154,168,226);
         }
         .eventbar_container{
+            position:relative;
             padding: 10px 6px 70px 6px;
             margin-right: 12px;
             margin-left: 12px;
             background-color: rgb(255,255,255);
             border-radius: 25px;
+            box-shadow: 10px 10px 5px rgb(232,225,225);
         }
         .eventbar h1{
+            text-align: center;
             position: relative;
             padding: 20px;
+            font-family: "Andale Mono", monospace;
         }
 
         .eventbar a {
           padding: 10px 10px 10px 16px;
           text-decoration: none;
           font-size: 25px;
-          color: #818181;
+          color: rgb(106,106,106);
           display: block;
             background-color: rgb(154,168,226);
             border-radius: 25px;
+            font-family: "Andale Mono", monospace;
         }
         .eventbar a:hover {
             color: #f1f1f1;
@@ -46,8 +55,16 @@
           padding: 6px 16px 6px 16px;
           text-decoration: none;
           font-size: 15px;
-          color: #818181;
+          color: rgb(106,106,106);
           display: block;
+            font-family: "Andale Mono", monospace;
+        }
+        .go_button {
+            border-radius: 12px;
+            position:absolute;
+            bottom:8px;
+            right:8px;
+            font-size: 15px;
         }
         .main {
           margin-left: 33%; /* Same as the width of the sidenav */
@@ -62,13 +79,16 @@
 <body>
     <div class="eventbar">
         <h1>Events</h1>
+        <div class="line"></div>
         <div class="eventbar_container">
             <a>placehold</a>
             <div class ="event_info">
                     this event is about "......"<br>
                     date is "....."<br>
                 </div>
+            <button class="button go_button"> -> </button>
         </div>
+
     </div>
     <div class="main">
         <p>Hello</p>
