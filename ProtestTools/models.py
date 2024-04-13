@@ -33,6 +33,7 @@ class Event:
 
 
 class User(UserMixin):
-    def __init__(self, username, password):
-        self.id = username
-        self.password = password
+    def __init__(self, username, id, active=True):
+        self.id = id
+        self.username = username
+        self.active = active

@@ -7,6 +7,8 @@ from flask import (
     current_app,
     Blueprint,
 )
+from bson import ObjectId
+from flask_login import current_user, login_required
 from app import client
 from werkzeug.security import generate_password_hash, check_password_hash
 from secrets import token_urlsafe
@@ -18,15 +20,18 @@ auth_func = Blueprint("auth_func", __name__)
 
 @auth_func.route("/login", methods=["GET", "POST"])
 def login():
+    # TODO: Add redirect to event creation page
+    if current_user.is_authenticated:
+        return redirect(url_for("eventview.view_events"))
     if request.method == "POST":
-        try_login(request.form["username"], request.form["password"])
+        if try_login(request.form["username"], request.form["password"]):
+            return redirect(request.args.get("next") or "eventview.view_events")
     error = None
     return render_template("login_page.html", error=error)
 
 
 @auth_func.route("/signup/<invite_id>", methods=["GET", "POST"])
 def create_user(invite_id):
-    #
     if valid_new_user_link(invite_id):
         error = None
         if request.method == "POST":
@@ -44,13 +49,12 @@ def create_user(invite_id):
 
 
 @auth_func.route("/generate_invite", methods=["GET", "POST"])
+@login_required
 def generate_invite():
     # Flask endpoint to generate an invite
     invite_url = None
     if request.method == "POST":
-        print(request.form)
         invite_url = create_invite(request.form["invite_uses"])
-        print(invite_url)
     return render_template("generate_invite.html", invite_url=invite_url)
 
 
@@ -63,11 +67,12 @@ def try_login(username, password):
     """
     try:
         x = client.cx.ProtestTools.Users.find_one({"username": username})
-        hashed_pw = generate_password_hash(password, method="pbkdf2", salt_length=16)
-        if check_password_hash(password, x["password"]):
-            user = User(username, hashed_pw)
+        if check_password_hash(x["password"], password):
+            user = User(username, id=x["_id"])
             login_user(user, remember=True)
-    except:
+            return True
+    except ValueError as e:
+        print(e)
         return False
 
 
