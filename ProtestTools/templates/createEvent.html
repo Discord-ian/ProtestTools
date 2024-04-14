@@ -56,7 +56,7 @@ Location Map<br>
         formData.append("lat", lat);
         formData.append("lng", lng);
         try {
-            const response = await fetch("http://127.0.0.1:5000/map/create_pin", {
+            const response = await fetch("/map/create_event", {
                 method: 'POST',
                 body: formData
                 })
