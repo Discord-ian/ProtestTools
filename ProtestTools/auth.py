@@ -1,14 +1,13 @@
 from flask import (
-    Flask,
     redirect,
     render_template,
     request,
     url_for,
-    current_app,
     Blueprint,
 )
-from bson import ObjectId
 from flask_login import current_user, login_required, logout_user
+
+from db import check_for_duplicate_user
 from app import client
 from werkzeug.security import generate_password_hash, check_password_hash
 from secrets import token_urlsafe
@@ -46,7 +45,9 @@ def create_user(invite_id):
             if request.form["password"] != request.form["password2"]:
                 error = "Passwords do not match."
                 return render_template("signup_page.html", error=error)
-            if not check_for_duplicate(key="username", value=request.form["username"]):
+            if not check_for_duplicate_user(
+                key="username", value=request.form["username"]
+            ):
                 error = "Username is taken."
                 return render_template("signup_page.html", error=error)
             if decrement_invite(invite_id):
@@ -129,12 +130,3 @@ def create_invite(uses):
     invite = {"invite_id": invite_id, "uses": int(uses)}
     client.cx.ProtestTools.InviteLinks.insert_one(invite)
     return url_for("auth_func.create_user", invite_id=invite_id, _external=True)
-
-
-def check_for_duplicate(key, value):
-    x = client.cx.ProtestTools.Users
-    duplicate = x.find_one({key: value})
-    if duplicate is not None:
-        return False
-    else:
-        return True

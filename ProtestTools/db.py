@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from flask_pymongo import PyMongo
 from flask import current_app, g
+
 from app import client
 from models import User, Event
 from bson import ObjectId
@@ -58,3 +59,21 @@ def get_event_info(event_id):
         return event
     except TypeError:
         return None
+
+
+def check_for_duplicate_user(key, value):
+    x = client.cx.ProtestTools.Users
+    duplicate = x.find_one({key: value})
+    if duplicate is not None:
+        return False
+    else:
+        return True
+
+
+def check_for_duplicate_event(key, value):
+    x = client.cx.ProtestTools.Events
+    duplicate = x.find_one({key: value})
+    if duplicate is not None:
+        return False
+    else:
+        return True
