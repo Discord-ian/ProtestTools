@@ -8,7 +8,7 @@ from flask import (
     Blueprint,
 )
 from bson import ObjectId
-from flask_login import current_user, login_required
+from flask_login import current_user, login_required, logout_user
 from app import client
 from werkzeug.security import generate_password_hash, check_password_hash
 from secrets import token_urlsafe
@@ -30,6 +30,12 @@ def login():
     return render_template("login_page.html", error=error)
 
 
+@auth_func.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("eventview.view_events"))
+
+
 @auth_func.route("/signup/<invite_id>", methods=["GET", "POST"])
 def create_user(invite_id):
     if valid_new_user_link(invite_id):
@@ -43,6 +49,7 @@ def create_user(invite_id):
                 generate_db_user(
                     request.form["username"], request.form["password"], invite_id
                 )
+                return redirect(url_for("eventview.view_events"))
         return render_template("signup_page.html", error=error)
     else:
         return redirect(url_for("eventview.view_events"))

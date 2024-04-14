@@ -8,23 +8,15 @@
      crossorigin=""></script>
 <head><h1>ProtestTools</h1>
     <style>
+        #map_section {
+            display:flex;
+            height:100vh
+        }
         #map {
             height: 40vh;
+            justify-content: center;
             width: 40vw;
-
         }
-        .col-25 {
-            float: left;
-            width: 25%;
-            margin-top: 6px;
-        }
-
-        .col-75 {
-            float: left;
-            width: 75%;
-            margin-top: 6px;
-        }
-
     </style>
 
 
@@ -32,9 +24,7 @@
 <body>
 Location Map<br>
 <div id="map">
-</div>
-
-<script>
+    <script>
     var startLat = {{ lat|safe }}
     var startLong = {{ long|safe }}
     var map = L.map('map').setView([startLat, startLong], 13);
@@ -80,6 +70,7 @@ Location Map<br>
     }
 
 </script>
+</div>
 <br>
 <div class="inputbox">
     <form action=" ", method="post" id="event_form">

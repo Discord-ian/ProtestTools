@@ -6,7 +6,7 @@ import folium
 eventview = Blueprint("eventview", __name__)
 
 
-@eventview.route("/eventview")
+@eventview.route("/")
 def view_events():
     # TODO: add information to main from database on click
     # TODO: add links to individual event pages
