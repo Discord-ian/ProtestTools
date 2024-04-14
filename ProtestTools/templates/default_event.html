@@ -3,27 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <h>Event ____</h>
+    <style>
+        .eventbar {
+          height: 100%;
+          width: 40%;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: rgb(244,244,244);
+          overflow-x: hidden;
+          padding-top: 7px;
+            overflow-y: scroll;
+            border-radius: 25px;
+
+        }
+        .eventbar_container{
+            position:relative;
+            padding: 10px 6px 70px 6px;
+            margin: 10px 12px;
+            background-color: rgb(255,255,255);
+            border-radius: 25px;
+            box-shadow: 10px 10px 5px rgb(232,225,225);
+        }
+        .eventbar h1{
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            font-family: "Andale Mono", monospace;
+        }
+        .eventbar a {
+          padding: 10px 10px 10px 16px;
+          text-decoration: none;
+          font-size: 25px;
+            color: #f1f1f1;
+          display: block;
+            background-color: rgb(154,168,226);
+            border-radius: 25px;
+            font-family: "Andale Mono", monospace;
+        }
+        .event_info {
+          padding: 6px 16px 6px 16px;
+          text-decoration: none;
+          font-size: 15px;
+          color: rgb(106,106,106);
+          display: block;
+            font-family: "Andale Mono", monospace;
+        }
+        .map_title{
+            border-radius:25px;
+            font-family: "Andale Mono", monospace;
+            font-size:27pt;
+                color: #f1f1f1;
+            background-color:  rgb(154,168,226);
+            height: 10vh;
+            width: 30vw;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .main {
+          margin-left: 28vw;
+          font-size: 28px;
+            background-color: rgb(74,90,154);
+
+        }
+
+
+    </style>
 </head>
 <body>
-    Location Map<br>
-    {{ iframe|safe }}<br>
-    <div>
-        {{ event.event_name }}<br>
+    <div class ="eventbar">
+
+        <div class="eventbar_container">
+            <a>
+                Cause
+            </a>
+            <div class = "event_info">
+                {{ event.cause }}<br>
+            </div>
+
+        </div>
+        <div class="eventbar_container">
+            <a>
+                Date
+            </a>
+            <div class = "event_info">
+                {{ event.date }}<br>
+            </div>
+
+        </div>
+        <div class="eventbar_container">
+            <a>
+                Time
+            </a>
+            <div class = "event_info">
+                {{ event.time }}<br>
+            </div>
+        </div>
+        <div class="eventbar_container">
+            <a>
+                Address
+            </a>
+            <div class = "event_info">
+               {{ event.address }}<br>
+            </div>
+
     </div>
-    <div>
-        {{ event.cause }}<br>
+
     </div>
+    <div class="main">
+         <h1 class="map_title"> {{ event.event_name }} </h1>
+
+        <div class="map_container">
+            <div class="map">
+                {{ iframe|safe }}
+            </div>
     <div>
         {{ event.description }}<br>
     </div>
-    <div>
-        {{ event.date }}<br>
-    </div>
-    <div>
-        {{ event.time }}<br>
-    </div>
-    <div>
-        {{ event.address }}<br>
-    </div>
+        </div>
+        </div>
+
 </body>
 </html>
