@@ -35,3 +35,26 @@ def get_event_dicts():
     for event in events:
         return_list.append(event)
     return return_list
+
+
+def valid_event_id(event_id):
+    mongo = client.cx
+    db = mongo.ProtestTools
+    try:
+        event = db.Events.find_one({"_id": ObjectId(event_id)})
+        if event is not None:
+            return True
+        else:
+            return False
+    except TypeError:
+        return False
+
+
+def get_event_info(event_id):
+    mongo = client.cx
+    db = mongo.ProtestTools
+    try:
+        event = db.Events.find_one({"_id": ObjectId(event_id)})
+        return event
+    except TypeError:
+        return None
