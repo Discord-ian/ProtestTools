@@ -30,11 +30,12 @@ def create_pin():
         event.name = request.form["event_name"]
         event.date = request.form["event_date"]
         event.time = request.form["event_time"]
+        event.description = request.form["event_description"]
+        event.cause = request.form["event_cause"]
         event.address = request.form["event_address"]
         event.city = request.form["event_city"]
         event.zip_code = request.form["event_zip"]
         event.state = request.form["event_state"]
-        event.country = request.form["event_country"]
         event.lat = request.form["lat"]
         event.lng = request.form["lng"]
         add_event(event)
