@@ -3,4 +3,4 @@ folium
 flask-login
 flask_bcrypt
 flask_pymongo
-
+dnspython
