@@ -12,8 +12,8 @@ def view_events():
     # TODO: add links to individual event pages
     # set the iframe width and height
     iframe_map = folium.Map(location=(38.9673769, -95.2793475))
-    iframe_map.get_root().width = "600px"
-    iframe_map.get_root().height = "400px"
+    iframe_map.get_root().width = "1040vw"
+    iframe_map.get_root().height = "740vh"
     iframe = iframe_map.get_root()._repr_html_()
     events = get_event_dicts()
     return render_template("event_viewer.html", iframe=iframe, events=events)

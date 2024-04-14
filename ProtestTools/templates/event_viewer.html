@@ -66,14 +66,47 @@
             right:8px;
             font-size: 15px;
         }
+        .map_title{
+            border-radius:25px;
+            font-family: "Andale Mono", monospace;
+            font-size:27pt;
+                color: #f1f1f1;
+            background-color:  rgb(154,168,226);
+            height: 10vh;
+            width: 30vw;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .map_container{
+            margin-left:4vw;
+
+        }
+
+        .create_event{
+            border-radius: 18px;
+            position:absolute;
+            top: 0;
+            right:14vw;
+            font-size: 16pt;
+        }
+
+        .log_out{
+            border-radius: 18px;
+            position:absolute;
+            top: 0;
+            right:6vw;
+            font-size: 16pt;
+        }
+
         .main {
-          margin-left: 33%; /* Same as the width of the sidenav */
-          font-size: 28px; /* Increased text to enable scrolling */
-          padding: 0px 10px;
+          margin-left: 28%;
+          font-size: 28px;
             background-color: rgb(74,90,154);
         }
-        .event {
-            height: 20vh
+        .map {
+            margain-left:4w;
         }
 
 
@@ -96,8 +129,17 @@
         </div>
 
     <div class="main">
-        <p>Hello</p>
-        {{ iframe|safe }}
+        <div>
+            <h1 class="map_title"> Protest Tracker </h1>
         </div>
+        <div class="map_container">
+            <div class="map">
+                {{ iframe|safe }}
+            </div>
+
+        </div>
+
+
+    </div>
 </body>
 </html>
