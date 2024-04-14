@@ -70,6 +70,13 @@
             padding: 20px;
             font-family: "Andale Mono", monospace;
         }
+                .configbar h3{
+            text-align: center;
+            position: relative;
+                    color:darkred;
+            padding: 20px;
+            font-family: "Andale Mono", monospace;
+        }
 
         .configbar a {
           padding: 10px 10px 10px 16px;
@@ -190,6 +197,7 @@
 <body>
     <div class="configbar">
         <h1>Create Event</h1>
+        <h3 id="error_msg", style="display:none;">Error: Please place a pin on the map</h3>
         <hr class="line">
         <form action=" ", method="post" id="event_form">
             <div class="configbar_container">
@@ -270,12 +278,7 @@
     function onMapClick(e) {
         if(marker == null) {
             marker = L.marker(e.latlng, {draggable:true}).addTo(map)
-            document.querySelector("#event_form").addEventListener("submit", (event) => {
-            event.preventDefault();
-            sendFormData()
-    });
-        }
-    }
+    }}
     map.on('click', onMapClick)
     async function sendFormData() {
         console.log("data")
@@ -283,6 +286,14 @@
         if (marker != null) {
             lat = marker.getLatLng().lat;
             lng = marker.getLatLng().lng;
+            console.log(lat)
+        }
+        else {
+            var err_msg = document.querySelector("#error_msg");
+            err_msg.style.display = 'block';
+            err_msg.scrollIntoView();
+
+            return
         }
         formData.append("lat", lat);
         formData.append("lng", lng);
@@ -299,6 +310,11 @@
             console.error(e);
             }
     }
+        document.querySelector("#event_form").addEventListener("submit", (event) => {
+            event.preventDefault();
+            sendFormData();
+        })
+
 
 </script>
 </div>
