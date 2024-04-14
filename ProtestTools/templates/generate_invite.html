@@ -2,16 +2,125 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Generate Invite</title>
+    <style>
+        .logocontainer{
+            height:80vh;
+            width:40vw;
+            position: fixed;
+            top:0;
+            left:0;
+            display:flex;
+            flex-direction:column ;
+            justify-content: center;
+            align-items: center;
+            column-gap: 290px;
+            margin-left: 10vw;
+            margin-bottom: 14%;
+        }
+        .title{
+            font-size: 75pt;
+            font-family: "Andale Mono", monospace;
+
+        }
+        .signup{
+            font-size: 90px;
+            font-family: "Andale Mono", monospace;
+        }
+
+        .inputcontainer{
+            height:60vh;
+            width:40vw;
+            position: fixed;
+            top:0;
+            right:0;
+            display:flex;
+            flex-direction:column ;
+            justify-content: space-around;
+            align-items: center;
+            column-gap: 290px;
+            margin: 20vh 2vw;
+        }
+        .box{
+            font-size: 44pt;
+            height:70px;
+            width:450px;
+            padding:20px;
+            border-radius: 18px;
+            background-color: rgb(244,244,244);
+            font-family: "Andale Mono", monospace;
+        }
+
+        #pass1{
+            font-size: 44pt;
+            height:70px;
+            width:450px;
+            padding:20px;
+            border-radius: 18px;
+            background-color: rgb(244,244,244);
+            font-family: "Andale Mono", monospace;
+        }
+
+        #pass2 {
+            font-size: 44pt;
+            height: 70px;
+            width: 450px;
+            padding: 20px;
+            border-radius: 18px;
+            background-color: rgb(244, 244, 244);
+            font-family: "Andale Mono", monospace;
+        }
+        body{
+            background-color: rgb(74,90,154);
+        }
+
+        #invite_code {
+            text-align: center;
+            font-family: "Andale Mono", monospace;
+            font-size:10pt;
+        }
+
+        .signup_button{
+            text-align: center;
+            border-radius:12px;
+            font-family: "Andale Mono", monospace;
+            font-size:20pt;
+            background-color: rgb(154,168,226);
+            border-color: rgb(154,168,226);
+            width: 200px;
+            height:80px;
+        }
+    </style>
 </head>
 <body>
-    <form action="" method="post">
-        <label for="invite_uses">Invite Uses</label>
-        <input type="number" id="invite_uses" min="1" max="100" name="invite_uses" value=" {{ request.form.invite_uses }} ">
-        <input class="btn" type="submit" Value="Generate">
-    </form>
-    {% if invite_url %}
-    <a href=" {{ invite_url }} ">{{invite_url}}</a>
-    {% endif %}
+
+    <div class="container">
+      <br>
+        <div class="logocontainer">
+            <div class="title">
+                Generate
+            </div>
+            <div class="signup">
+                Invites
+            </div>
+        </div>
+        <form action="" method="post">
+        <div class="inputcontainer">
+
+        <input type="number" placeholder="Invite Uses" id="invite_uses" class="box" min="1" max="100"  name="invite_uses" value=" {{ request.form.invite_uses }} ">
+            <div>
+                {% if invite_url %}
+
+                <label class="box" for="invite_uses" id="invite_code"><a href=" {{ invite_url }} ">{{invite_url}}</a></label>
+                {% endif %}
+            </div>
+            <div>
+                  <input class="button signup_button" type="submit" value="Generate">
+            </div>
+
+        </div>
+
+        </form>
+
+    </div>
 </body>
 </html>
