@@ -9,7 +9,7 @@
 <head><h1>ProtestTools</h1>
     <style>
                 body {background-color: rgb(74,90,154);}
-        .eventbar {
+        .configbar {
           height: 100%;
           width: 25%;
           position: fixed;
@@ -31,7 +31,7 @@
             width: 80%;
             border-radius: 12px;
         }
-        .eventbar_container{
+        .configbar_container{
             position:relative;
             padding: 10px 6px 70px 6px;
             margin: 10px 12px;
@@ -39,14 +39,14 @@
             border-radius: 25px;
             box-shadow: 10px 10px 5px rgb(232,225,225);
         }
-        .eventbar h1{
+        .configbar h1{
             text-align: center;
             position: relative;
             padding: 20px;
             font-family: "Andale Mono", monospace;
         }
 
-        .eventbar a {
+        .configbar a {
           padding: 10px 10px 10px 16px;
           text-decoration: none;
           font-size: 25px;
@@ -58,7 +58,7 @@
         }
 
 
-        .event_info {
+        .input_info {
           padding: 6px 16px 6px 16px;
           text-decoration: none;
           font-size: 15px;
@@ -167,15 +167,66 @@
 
 </head>
 <body>
-    <div class="eventbar">
+    <div class="configbar">
         <h1>Create Event</h1>
         <hr class="line">
-            <div class="eventbar_container">
-                <a>Field Name</a>
-                <div class="event_info">
-                    Entry Box
+        <form action=" ", method="post" id="event_form">
+            <div class="configbar_container">
+                <a>Event Name</a>
+                <div class="input_info">
+                    <input type="text" id="evname" required name="event_name" placeholder="Event name..">
                 </div>
             </div>
+            <div class="configbar_container">
+                <a>Cause</a>
+                <div class="input_info">
+                    <input type="text" id="evcause" required name="event_cause">
+                </div>
+            </div>
+            <div class="configbar_container">
+                <a>Event Date</a>
+                <div class="input_info">
+                    <input type="date" id="evdate" required name="event_date">
+                </div>
+            </div>
+            <div class="configbar_container">
+                <a>Event Start Time</a>
+                <div class="input_info">
+                    <input type="time" id="evtime" required name="event_time">
+                </div>
+            </div>
+            <div class="configbar_container">
+                <a>Street Address</a>
+                <div class="input_info">
+                    <input type="text" id="evaddress" name="event_address" required placeholder="Street Address">
+                </div>
+            </div>
+            <div class="configbar_container">
+                <a>City</a>
+                <div class="input_info">
+                    <input type="text" id="evcity" name="event_city" required placeholder="City..">
+                </div>
+            </div>
+            <div class="configbar_container">
+                <a>State</a>
+                <div class="input_info">
+                    <input type="text" id="evstate" name="event_state" required placeholder="State(two letter)..">
+                </div>
+            </div>
+            <div class="configbar_container">
+                <a>Zip Code</a>
+                <div class="input_info">
+                    <input type="text" id="evzip" required name="event_zip">
+                </div>
+            </div>
+            <div class="configbar_container">
+                <a>Description</a>
+                <div class="input_info">
+                    <textarea id="evdesc" name="event_description" required cols="50" rows="10"></textarea>
+                </div>
+            </div>
+            <input type="submit"/>
+        </form>
     </div>
 <div class="main">
     <div class="map_container">
