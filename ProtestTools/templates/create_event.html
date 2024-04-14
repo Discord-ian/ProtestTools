@@ -39,6 +39,26 @@
             border-radius: 25px;
             box-shadow: 10px 10px 5px rgb(232,225,225);
         }
+        .submit_container{
+            position:relative;
+            padding: 10px 6px 70px 6px;
+            margin: 10px 12px;
+            background-color: rgb(154,168,226);
+            border-radius: 25px;
+            box-shadow: 10px 10px 5px rgb(136,149,203);
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+        }
+        #submit_button{
+            text-align: center;
+            height: 7vh;
+            width: 12vw;
+            font-size: 16pt;
+                color:rgb(154,168,226);
+            background-color: rgb(244,244,244);
+            border-color:rgb(244,244,244) ;
+        }
         .configbar h1{
             text-align: center;
             position: relative;
@@ -148,7 +168,7 @@
             background-color: rgb(74,90,154);
 
         }
-        .map {
+        #map {
             height: 75vh;
             width:62vw;
         }
@@ -157,11 +177,7 @@
             display:flex;
             height:100vh
         }
-        #map {
-            height: 40vh;
-            justify-content: center;
-            width: 40vw;
-        }
+
     </style>
 
 
@@ -225,12 +241,15 @@
                     <textarea id="evdesc" name="event_description" required cols="30" rows="10"></textarea>
                 </div>
             </div>
-            <input type="submit"/>
+            <div class="submit_container">
+                <input type="submit" id="submit_button"/>
+            </div>
+
         </form>
     </div>
 <div class="main">
     <div class="map_container">
-        <div class="map">
+        <div id="map">
     <script>
     var startLat = {{ lat|safe }}
     var startLong = {{ long|safe }}
