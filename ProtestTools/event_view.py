@@ -1,5 +1,6 @@
 from flask import Flask, render_template, Blueprint, redirect, url_for
 from db import get_event_dicts, valid_event_id, get_event_info
+from flask_login import current_user
 import folium
 
 # page contains list of created events and displays event information on click
@@ -14,7 +15,9 @@ def view_events():
     iframe_map = folium.Map(location=(38.9673769, -95.2793475))
     iframe = iframe_map.get_root()._repr_html_()
     events = get_event_dicts()
-    return render_template("event_viewer.html", iframe=iframe, events=events)
+    return render_template(
+        "event_viewer.html", iframe=iframe, events=events, user=current_user
+    )
 
 
 @eventview.route("/event/<event_id>")

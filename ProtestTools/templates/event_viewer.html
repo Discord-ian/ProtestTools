@@ -143,8 +143,13 @@
     <div class="main">
         <div>
             <h1 class="map_title"> Protest Tracker </h1>
-            <button onclick="location.href='http://127.0.0.1:5000/logout'" class="button log_out"> Log Out</button>
-            <button onclick="location.href='http://127.0.0.1:5000/map/create_pin'" class="button create_event"> Create Event </button>
+            {% if user.is_authenticated %}
+            <button onclick="location.href='/logout'" class="button log_out"> Log Out</button>
+            <button onclick="location.href='/generate_invite'" class="button invite_button"> Invite </button>
+            {% else %}
+            <button onclick="location.href='/login'" class="button log_out"> Login</button>
+            {% endif %}
+            <button onclick="location.href='/map/create_pin'" class="button create_event"> Create Event </button>
         </div>
         <div class="map_container">
             <div class="map">
