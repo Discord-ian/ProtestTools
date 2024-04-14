@@ -17,7 +17,7 @@ def view_events():
     :return:
     """
     events = get_event_dicts()
-    iframe_map = folium.Map(location=(38.9673769, -95.2793475))
+    iframe_map = folium.Map(location=(38.9673769, -95.2793475), zoom_start=12)
     for event in events:
         d = datetime.strptime(event["time"], "%H:%M")
         event["twelve_hr"] = d.strftime("%I:%M %p")
