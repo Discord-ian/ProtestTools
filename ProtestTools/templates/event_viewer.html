@@ -92,6 +92,9 @@
             height: 7vh;
             width: 12vw;
             font-size: 16pt;
+                color:rgb(154,168,226);
+            background-color: rgb(244,244,244);
+            border-color:rgb(244,244,244) ;
         }
 
         .log_out{
@@ -102,12 +105,16 @@
             height: 7vh;
             width: 9vw;
             font-size: 16pt;
+                color:rgb(154,168,226);
+            background-color: rgb(244,244,244);
+            border-color:rgb(244,244,244) ;
         }
 
         .main {
           margin-left: 28vw;
           font-size: 28px;
             background-color: rgb(74,90,154);
+
         }
         .map {
             height: 75vh;
@@ -136,8 +143,8 @@
     <div class="main">
         <div>
             <h1 class="map_title"> Protest Tracker </h1>
-            <button onclick="" class="button log_out"> Log Out</button>
-            <button onclick="" class="button create_event"> Create Event </button>
+            <button onclick="location.href='http://127.0.0.1:5000/logout'" class="button log_out"> Log Out</button>
+            <button onclick="location.href='http://127.0.0.1:5000/map/create_pin'" class="button create_event"> Create Event </button>
         </div>
         <div class="map_container">
             <div class="map">
