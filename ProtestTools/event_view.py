@@ -29,6 +29,7 @@ def view_events():
 
 
 @eventview.route("/event/<event_id>")
+@login_required
 def event_info(event_id):
     if valid_event_id(event_id):
         event = get_event_info(event_id)
