@@ -85,7 +85,18 @@
             margin-left:4vw;
 
         }
-
+        .invite_button{
+            border-radius: 18px;
+            position:absolute;
+            top: 4vh;
+            right:27vw;
+            height: 7vh;
+            width: 6vw;
+            font-size: 16pt;
+                color:rgb(154,168,226);
+            background-color: rgb(244,244,244);
+            border-color:rgb(244,244,244) ;
+        }
         .create_event{
             border-radius: 18px;
             position:absolute;
@@ -151,7 +162,7 @@
                     {{event.cause}}<br>
                     date is {{event.date}} at {{event.time}}<br>
                 </div>
-                <button onclick="location.href='/event/{{event.id}}'" class="button go_button"> -> </button>
+                <button onclick="location.href='/event/{{event._id}}'" class="button go_button"> -> </button>
                 </div>
                 {% endfor %}
         </div>
@@ -165,7 +176,7 @@
             {% else %}
             <button onclick="location.href='/login'" class="button log_out"> Login</button>
             {% endif %}
-            <button onclick="location.href='/map/create_pin'" class="button create_event"> Create Event </button>
+            <button onclick="location.href='/map/create_event'" class="button create_event"> Create Event </button>
         </div>
         <div class="map_container">
             <div class="map">

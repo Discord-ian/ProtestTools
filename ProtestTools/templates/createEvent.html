@@ -55,7 +55,6 @@ Location Map<br>
         }
         formData.append("lat", lat);
         formData.append("lng", lng);
-        formData.append("event_name", "wahoo")
         try {
             const response = await fetch("http://127.0.0.1:5000/map/create_pin", {
                 method: 'POST',
@@ -83,7 +82,7 @@ Location Map<br>
 
         <div>
             <label for="evdesc">Event Description</label><br>
-            <textarea id="evdesc" name="paragraph_text" cols="50" rows="10"></textarea>
+            <textarea id="evdesc" name="event_description" cols="50" rows="10"></textarea>
         </div>
         <div class="col-25">
             <label for="evcause">Cause</label>
@@ -126,12 +125,6 @@ Location Map<br>
         </div>
         <div class="col-75">
             <input type="text" id="evstate" name="event_state" placeholder="State(two letter)..">
-        </div>
-        <div class="col-25">
-            <label for="evcountry">Country</label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="evcountry" name="event_country">
         </div>
         <input type="submit"/>
     </form>
