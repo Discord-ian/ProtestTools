@@ -69,12 +69,3 @@ def check_for_duplicate_user(key, value):
         return False
     else:
         return True
-
-
-def check_for_duplicate_event(key, value):
-    x = client.cx.ProtestTools.Events
-    duplicate = x.find_one({key: value})
-    if duplicate is not None:
-        return False
-    else:
-        return True

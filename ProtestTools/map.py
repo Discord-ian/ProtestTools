@@ -1,7 +1,7 @@
 from flask import render_template, request, Blueprint, redirect, url_for, jsonify
 import folium
 from flask_login import login_required
-from db import add_event, check_for_duplicate_event
+from db import add_event
 from models import Event
 
 map_functions = Blueprint("map", __name__)
@@ -41,16 +41,9 @@ def create_event():
         event.state = request.form["event_state"]
         event.lat = request.form["lat"]
         event.lng = request.form["lng"]
-        if not check_for_duplicate_event(key="event_name", value=event.name):
-            error = "Duplicate Event Name"
-            return render_template(
-                "create_event.html", lat=38.9673769, long=-95.2793475, error=error
-            )
-        else:
-            id = add_event(event)
-            id_s = str(id)
-            print(jsonify(id=id_s))
-            return jsonify(id=id_s)
+        id = add_event(event)
+        id_s = str(id)
+        return jsonify(id=id_s)
     else:
         return render_template(
             "create_event.html", lat=38.9673769, long=-95.2793475, error=error
