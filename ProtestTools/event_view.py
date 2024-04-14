@@ -23,9 +23,25 @@ def view_events():
 @eventview.route("/event/<event_id>")
 def event_info(event_id):
     if valid_event_id(event_id):
-        iframe_map = folium.Map(location=(38.9673769, -95.2793475))
-        iframe = iframe_map.get_root()._repr_html_()
         event = get_event_info(event_id)
+        location = event["location"]
+        address = (
+            location["address"]
+            + "\r\n"
+            + location["city"]
+            + ", "
+            + location["state"]
+            + " "
+            + location["zip_code"]
+        )
+        iframe_map = folium.Map(
+            location=(location["lat"], location["lng"]), zoom_start=13
+        )
+        event = get_event_info(event_id)
+        folium.Marker(
+            location=(float(location["lat"]), float(location["lng"])), popup=address
+        ).add_to(iframe_map)
+        iframe = iframe_map.get_root()._repr_html_()
         return render_template("default_event.html", iframe=iframe, event=event)
     else:
         return redirect(url_for("eventview.view_events"))
