@@ -63,11 +63,21 @@
             align-items: center;
 
         }
+        .map_container{
+            margin-left:4vw;
+
+        }
         .main {
-          margin-left: 28vw;
+          margin-left: 40vw;
           font-size: 28px;
             background-color: rgb(74,90,154);
+            top: 0;
+          right: 0;
 
+        }
+        .map {
+            height: 75vh;
+            width:62vw;
         }
 
 
@@ -107,24 +117,24 @@
                 Address
             </a>
             <div class = "event_info">
-               {{ event.address }}<br>
+               {{event.address }}<br>
             </div>
 
-    </div>
+        </div>
 
     </div>
     <div class="main">
-         <h1 class="map_title"> {{ event.event_name }} </h1>
+        </div>
+            <h1 class="map_title"> {{ event.event_name }} </h1>
 
         <div class="map_container">
             <div class="map">
                 {{ iframe|safe }}
             </div>
-    <div>
-        {{ event.description }}<br>
+        <div>
+            {{ event.description }}<br>
+        </div>
     </div>
-        </div>
-        </div>
 
 </body>
 </html>
