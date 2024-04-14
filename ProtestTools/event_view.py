@@ -1,6 +1,6 @@
 from flask import Flask, render_template, Blueprint, redirect, url_for
 from db import get_event_dicts, valid_event_id, get_event_info
-from flask_login import current_user
+from flask_login import current_user, login_required
 import folium
 
 # page contains list of created events and displays event information on click
@@ -8,6 +8,7 @@ eventview = Blueprint("eventview", __name__)
 
 
 @eventview.route("/")
+@login_required
 def view_events():
     """
     Route to main page which shows the map with all current event markers.
