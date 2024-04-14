@@ -1,4 +1,4 @@
-from flask import render_template, request, Blueprint
+from flask import render_template, request, Blueprint, redirect, url_for, jsonify
 import folium
 from flask_login import login_required
 from db import add_event, check_for_duplicate_event
@@ -47,7 +47,11 @@ def create_event():
                 "create_event.html", lat=38.9673769, long=-95.2793475, error=error
             )
         else:
-            add_event(event)
-    return render_template(
-        "create_event.html", lat=38.9673769, long=-95.2793475, error=error
-    )
+            id = add_event(event)
+            id_s = str(id)
+            print(jsonify(id=id_s))
+            return jsonify(id=id_s)
+    else:
+        return render_template(
+            "create_event.html", lat=38.9673769, long=-95.2793475, error=error
+        )

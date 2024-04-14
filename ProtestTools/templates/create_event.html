@@ -291,7 +291,8 @@
                 method: 'POST',
                 body: formData
                 })
-            console.log(await response.json())
+            window.location.replace("/event/" + (await response.json())["id"]);
+            console.log(await response.json());
             }
             catch (e)
             {

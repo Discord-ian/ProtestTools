@@ -10,7 +10,8 @@ from bson import ObjectId
 def add_event(event_info):
     mongo = client.cx
     db = mongo.ProtestTools
-    db.Events.insert_one(event_info.dict())
+    event_id = db.Events.insert_one(event_info.dict())
+    return event_id.inserted_id
 
 
 def find_user(user_Id):
