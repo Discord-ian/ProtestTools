@@ -7,9 +7,9 @@ from models import Event
 map_functions = Blueprint("map", __name__)
 
 
-@map_functions.route("/map/create_pin", methods=["GET", "POST"])
+@map_functions.route("/map/create_event", methods=["GET", "POST"])
 @login_required
-def create_pin():
+def create_event():
     # TODO: Add default country option somewhere in config
     # TODO: Timezone support
     """
