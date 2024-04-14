@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from flask_pymongo import PyMongo
 from flask import current_app, g
 from app import client
-from models import User, Event, neat_address
+from models import User, Event
 from bson import ObjectId
 
 
@@ -55,7 +55,6 @@ def get_event_info(event_id):
     db = mongo.ProtestTools
     try:
         event = db.Events.find_one({"_id": ObjectId(event_id)})
-        event["neat_address"] = neat_address(event)
         return event
     except TypeError:
         return None

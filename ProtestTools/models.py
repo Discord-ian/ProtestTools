@@ -36,10 +36,6 @@ class Event:
         return return_dict
 
 
-def neat_address(event):
-    address = "{0.address}\n{0.city}, {0.state} {0.zip_code}".format(event.location)
-
-
 class User(UserMixin):
     def __init__(self, username, id, active=True):
         self.id = id
