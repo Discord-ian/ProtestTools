@@ -25,7 +25,9 @@ def login():
         return redirect(url_for("eventview.view_events"))
     if request.method == "POST":
         if try_login(request.form["username"], request.form["password"]):
-            return redirect(request.args.get("next") or "eventview.view_events")
+            return redirect(
+                request.args.get("next") or url_for("eventview.view_events")
+            )
     error = None
     return render_template("login_page.html", error=error)
 
