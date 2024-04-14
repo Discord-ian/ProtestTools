@@ -38,4 +38,4 @@ def create_event():
         event.lat = request.form["lat"]
         event.lng = request.form["lng"]
         add_event(event)
-    return render_template("createEvent.html", lat=38.9673769, long=-95.2793475)
+    return render_template("create_event.html", lat=38.9673769, long=-95.2793475)
