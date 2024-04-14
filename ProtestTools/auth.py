@@ -49,6 +49,7 @@ def create_user(invite_id):
                 generate_db_user(
                     request.form["username"], request.form["password"], invite_id
                 )
+                return redirect(url_for("eventview.view_events"))
         return render_template("signup_page.html", error=error)
     else:
         return redirect(url_for("eventview.view_events"))
