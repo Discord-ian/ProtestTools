@@ -8,6 +8,151 @@
      crossorigin=""></script>
 <head><h1>ProtestTools</h1>
     <style>
+                body {background-color: rgb(74,90,154);}
+        .eventbar {
+          height: 100%;
+          width: 25%;
+          position: fixed;
+          z-index: 1;
+          top: 0;
+          left: 0;
+          background-color: rgb(244,244,244);
+          overflow-x: hidden;
+          padding-top: 7px;
+            overflow-y: scroll;
+            border-radius: 25px;
+
+        }
+        .line{
+            color: rgb(154,168,226);
+            height: 5px;
+            box-shadow: none;
+            background-color: rgb(154,168,226);
+            width: 80%;
+            border-radius: 12px;
+        }
+        .eventbar_container{
+            position:relative;
+            padding: 10px 6px 70px 6px;
+            margin: 10px 12px;
+            background-color: rgb(255,255,255);
+            border-radius: 25px;
+            box-shadow: 10px 10px 5px rgb(232,225,225);
+        }
+        .eventbar h1{
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            font-family: "Andale Mono", monospace;
+        }
+
+        .eventbar a {
+          padding: 10px 10px 10px 16px;
+          text-decoration: none;
+          font-size: 25px;
+            color: #f1f1f1;
+          display: block;
+            background-color: rgb(154,168,226);
+            border-radius: 25px;
+            font-family: "Andale Mono", monospace;
+        }
+
+
+        .event_info {
+          padding: 6px 16px 6px 16px;
+          text-decoration: none;
+          font-size: 15px;
+          color: rgb(106,106,106);
+          display: block;
+            font-family: "Andale Mono", monospace;
+        }
+        .go_button {
+            border-radius: 12px;
+            position:absolute;
+            bottom:8px;
+            right:8px;
+            font-size: 15px;
+        }
+        .map_title{
+            border-radius:25px;
+            font-family: "Andale Mono", monospace;
+            font-size:27pt;
+                color: #f1f1f1;
+            background-color:  rgb(154,168,226);
+            height: 10vh;
+            width: 30vw;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .map_container{
+            margin-left:4vw;
+
+        }
+        .invite_button{
+            border-radius: 18px;
+            position:absolute;
+            top: 4vh;
+            right:27vw;
+            height: 7vh;
+            width: 6vw;
+            font-size: 16pt;
+                color:rgb(154,168,226);
+            background-color: rgb(244,244,244);
+            border-color:rgb(244,244,244) ;
+        }
+        .create_event{
+            border-radius: 18px;
+            position:absolute;
+            top: 4vh;
+            right:14vw;
+            height: 7vh;
+            width: 12vw;
+            font-size: 16pt;
+                color:rgb(154,168,226);
+            background-color: rgb(244,244,244);
+            border-color:rgb(244,244,244) ;
+        }
+
+        .log_out{
+            border-radius: 18px;
+            position:absolute;
+            top: 4vh;
+            right:4vw;
+            height: 7vh;
+            width: 9vw;
+            font-size: 16pt;
+                color:rgb(154,168,226);
+            background-color: rgb(244,244,244);
+            border-color:rgb(244,244,244) ;
+        }
+
+        .invite_button{
+            border-radius: 18px;
+            position:absolute;
+            top: 4vh;
+            right:27vw;
+            height: 7vh;
+            width: 9vw;
+            font-size: 16pt;
+                color:rgb(154,168,226);
+            background-color: rgb(244,244,244);
+            border-color:rgb(244,244,244) ;
+        }
+
+
+        .main {
+          margin-left: 28vw;
+          font-size: 28px;
+            background-color: rgb(74,90,154);
+
+        }
+        .map {
+            height: 75vh;
+            width:62vw;
+        }
+
         #map_section {
             display:flex;
             height:100vh
@@ -22,8 +167,19 @@
 
 </head>
 <body>
-Location Map<br>
-<div id="map">
+    <div class="eventbar">
+        <h1>Create Event</h1>
+        <hr class="line">
+            <div class="eventbar_container">
+                <a>Field Name</a>
+                <div class="event_info">
+                    Entry Box
+                </div>
+            </div>
+    </div>
+<div class="main">
+    <div class="map_container">
+        <div class="map">
     <script>
     var startLat = {{ lat|safe }}
     var startLong = {{ long|safe }}
@@ -70,64 +226,7 @@ Location Map<br>
 
 </script>
 </div>
-<br>
-<div class="inputbox">
-    <form action=" ", method="post" id="event_form">
-        <div class="col-25">
-            <label for="evname">Event Name</label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="evname" name="event_name" placeholder="Event name..">
-        </div>
-
-        <div>
-            <label for="evdesc">Event Description</label><br>
-            <textarea id="evdesc" name="event_description" cols="50" rows="10"></textarea>
-        </div>
-        <div class="col-25">
-            <label for="evcause">Cause</label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="evcause" name="event_cause">
-        </div>
-        <div class="col-25">
-            <label for="evdate">Event Date</label>
-        </div>
-        <div class="col-75">
-            <input type="date" id="evdate" name="event_date">
-        </div>
-        <div class="col-25">
-            <label for="evtime">Event Start Time</label>
-        </div>
-        <div class="col-75">
-            <input type="time" id="evtime" name="event_time">
-        </div>
-        <div class="col-25">
-            <label for="evaddress">Street Address</label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="evaddress" name="event_address" placeholder="Street Address">
-        </div>
-        <div class="col-25">
-            <label for="evcity">City</label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="evcity" name="event_city" placeholder="City..">
-        </div>
-        <div class="col-25">
-            <label for="evzip">Zip Code</label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="evzip" name="event_zip">
-        </div>
-        <div class="col-25">
-            <label for="evstate">State</label>
-        </div>
-        <div class="col-75">
-            <input type="text" id="evstate" name="event_state" placeholder="State(two letter)..">
-        </div>
-        <input type="submit"/>
-    </form>
+</div>
 </div>
 </body>
 </html>
