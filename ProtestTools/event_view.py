@@ -26,7 +26,7 @@ def event_info(event_id):
         iframe_map = folium.Map(location=(38.9673769, -95.2793475))
         iframe = iframe_map.get_root()._repr_html_()
         event = get_event_info(event_id)
-        return render_template("default_event.html", iframe=iframe, event_info=event)
+        return render_template("default_event.html", iframe=iframe, event=event)
     else:
         return redirect(url_for("eventview.view_events"))
     # set the iframe width and height

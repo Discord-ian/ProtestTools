@@ -15,6 +15,7 @@ class Event:
         self.country = None
         self.lat = None
         self.lng = None
+        self.id = None
 
     def dict(self):
         return_dict = {
