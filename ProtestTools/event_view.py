@@ -9,12 +9,19 @@ eventview = Blueprint("eventview", __name__)
 
 @eventview.route("/")
 def view_events():
-    # TODO: add information to main from database on click
-    # TODO: add links to individual event pages
-    # set the iframe width and height
-    iframe_map = folium.Map(location=(38.9673769, -95.2793475))
-    iframe = iframe_map.get_root()._repr_html_()
+    """
+    Route to main page which shows the map with all current event markers.
+    Has list on the side to give more info about each event
+    :return:
+    """
     events = get_event_dicts()
+    iframe_map = folium.Map(location=(38.9673769, -95.2793475))
+    for event in events:
+        folium.Marker(
+            location=(event["location"]["lat"], event["location"]["lng"]),
+            popup=event["event_name"],
+        ).add_to(iframe_map)
+    iframe = iframe_map.get_root()._repr_html_()
     return render_template(
         "event_viewer.html", iframe=iframe, events=events, user=current_user
     )

@@ -46,7 +46,9 @@ def create_user(invite_id):
             if request.form["password"] != request.form["password2"]:
                 error = "Passwords do not match."
                 return render_template("signup_page.html", error=error)
-            # TODO: Decrement invite id uses
+            if not check_for_duplicate(key="username", value=request.form["username"]):
+                error = "Username is taken."
+                return render_template("signup_page.html", error=error)
             if decrement_invite(invite_id):
                 generate_db_user(
                     request.form["username"], request.form["password"], invite_id
@@ -127,3 +129,12 @@ def create_invite(uses):
     invite = {"invite_id": invite_id, "uses": int(uses)}
     client.cx.ProtestTools.InviteLinks.insert_one(invite)
     return url_for("auth_func.create_user", invite_id=invite_id, _external=True)
+
+
+def check_for_duplicate(key, value):
+    x = client.cx.ProtestTools.Users
+    duplicate = x.find_one({key: value})
+    if duplicate is not None:
+        return False
+    else:
+        return True

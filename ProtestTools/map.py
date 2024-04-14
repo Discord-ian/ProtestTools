@@ -26,7 +26,6 @@ def create_event():
     """
     if request.method == "POST":
         event = Event()
-        print(request.form)
         event.name = request.form["event_name"]
         event.date = request.form["event_date"]
         event.time = request.form["event_time"]
